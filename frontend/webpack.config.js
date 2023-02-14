@@ -154,7 +154,7 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: JSON.stringify('development'), // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: true,
-      API_URL: process.env.API_URL,
+      REACT_APP_API_URL: process.env.API_URL,
       WP_HELP_EMAIL: 'info@acklenavenue.com',
     }),
     new WebpackCleanupPlugin(),
