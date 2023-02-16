@@ -111,11 +111,11 @@ jobs:
         keys: [frontend-build]
       # Your job code here
       - run:
-          name: Run frontend test
+          name: Run Scan frontend
           command:
             cd frontend
             npm install
-            npm run test
+            npm audit fix --audit-level=critical-
 
   scan-backend:
     docker:
@@ -127,11 +127,11 @@ jobs:
         keys: [backend-build]
       # Your job code here
       - run:
-          name: Run backend test
+          name: Run Scan backend
           command:
             cd backend
             npm install
-            npm run test
+            npm audit fix --audit-level=critical-
 
 #   deploy-infrastructure:
 #     docker:
