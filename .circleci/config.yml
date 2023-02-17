@@ -104,6 +104,7 @@ jobs:
   scan-frontend:
     docker:
       # Docker image here
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
@@ -120,6 +121,7 @@ jobs:
   scan-backend:
     docker:
       # Docker image here
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
@@ -310,16 +312,16 @@ workflows:
       - test-backend:
           requires: [build-backend]
       - scan-backend:
-          requires: [scan-backend]
+          requires: [[build-backend]
       - scan-frontend:
-          requires: [scan-frontend]
-      #- deploy-infrastructure:
-#           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-#           filters:
-#             branches:
-#               only: [test-feature-branch]
-#       - configure-infrastructure:
-#           requires: [deploy-infrastructure]
+          requires: [build-frontend]
+      # - deploy-infrastructure:
+      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #     filters:
+      #       branches:
+      #         only: [test-feature-branch]
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]
 #       - run-migrations:
 #           requires: [configure-infrastructure]
 #       - deploy-frontend:
