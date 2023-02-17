@@ -319,16 +319,16 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-front-end
-      - build-back-end
+      - build-frontend
+      - build-backend
       - test-front-end:
-          requires: [build-front-end]
+          requires: [build-frontend]
       - test-back-end:
-          requires: [build-back-end]
+          requires: [build-backend]
       - scan-back-end:
-          requires: [build-back-end]
+          requires: [build-backend]
       - scan-front-end:
-          requires: [build-front-end]
+          requires: [build-frontend]
       # - deploy-infrastructure:
       #     requires: [test-front-end, test-back-end, scan-front-end, scan-back-end]
       #     filters:
