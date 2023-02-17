@@ -106,6 +106,7 @@ jobs:
       # Docker image here
     steps:
       # Checkout code from git
+      - checkout
       # Restore from cache
       - restore_cache:
         keys: [frontend-build]
@@ -122,6 +123,7 @@ jobs:
       # Docker image here
     steps:
       # Checkout code from git
+      - checkout
       # Restore from cache
       - restore_cache:
         keys: [backend-build]
