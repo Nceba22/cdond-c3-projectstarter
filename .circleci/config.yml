@@ -94,7 +94,7 @@ jobs:
 #           paths:
 #             - backend/node_modules
 #           key: backend-scan
-# workflows:
+workflows:
   default:
     jobs:
       - build-frontend
