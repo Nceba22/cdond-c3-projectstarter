@@ -33,7 +33,7 @@ version: 2.1
 #             fi
             
 jobs:
-  build-front-end:
+  build-frontend:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -51,7 +51,7 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
 
-  build-back-end:
+  build-backend:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -68,7 +68,7 @@ jobs:
           paths: [backend/node_modules]
           key: backend-build
 
-  test-front-end:
+  test-frontend:
     docker:
       # Docker image here
       - image: circleci/node:13.8.0
@@ -85,7 +85,7 @@ jobs:
             cd frontend
             npm install
             npm run test
-  test-back-end:
+  test-backend:
     docker:
       # Docker image here
     steps:
@@ -102,7 +102,7 @@ jobs:
             npm install
             npm run test      
             
-  scan-front-end:
+  scan-frontend:
     docker:
       # Docker image here
       - image: circleci/node:13.8.0
@@ -125,7 +125,7 @@ jobs:
           paths: [front-end/node_modules]
           key: frontend-scan
           
-  scan-back-end:
+  scan-backend:
     docker:
       # Docker image here
       - image: circleci/node:13.8.0
