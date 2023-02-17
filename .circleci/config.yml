@@ -26,14 +26,14 @@ version: 2.1
 #             SUCCESS = 1
 #             if(( $SUCCESS==1 )); 
 #             then
-#             #  cd ~/project/backend
+#             #  cd ~/project/back-end
 #             #  npm install
 #             #  Add revert code here. You can find this in the Getting Started section.
 #               exit 1
 #             fi
             
 jobs:
-  build-frontend:
+  build-front-end:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -51,7 +51,7 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
 
-  build-backend:
+  build-back-end:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -61,14 +61,14 @@ jobs:
       - run:
           name: Back-end build
           command: |
-            cd frontend
+            cd backend
             npm install
             npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
 
-  test-frontend:
+  test-front-end:
     docker:
       # Docker image here
       - image: circleci/node:13.8.0
@@ -80,12 +80,12 @@ jobs:
         keys: [frontend-build]
       # Your job code here
       - run:
-          name: Run frontend test
+          name: Run front-end test
           command:  
             cd frontend
             npm install
             npm run test
-  test-backend:
+  test-back-end:
     docker:
       # Docker image here
     steps:
@@ -96,13 +96,13 @@ jobs:
         keys: [backend-build]
       # Your job code here
       - run:
-          name: Run backend test
+          name: Run back-end test
           command:
             cd backend
             npm install
             npm run test      
             
-  scan-frontend:
+  scan-front-end:
     docker:
       # Docker image here
       - image: circleci/node:13.8.0
@@ -114,7 +114,7 @@ jobs:
         keys: [frontend-scan]
       # Your job code here
       - run:
-          name: Scan frontend
+          name: Scan front-end
           command:
             cd frontend
             npm install
@@ -122,10 +122,10 @@ jobs:
             npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
       - save_cache:
-          paths: [frontend/node_modules]
+          paths: [front-end/node_modules]
           key: frontend-scan
           
-  scan-backend:
+  scan-back-end:
     docker:
       # Docker image here
       - image: circleci/node:13.8.0
@@ -137,7 +137,7 @@ jobs:
         keys: [backend-scan]
       # Your job code here
       - run:
-          name: Scan backend
+          name: Scan back-end
           command:
             cd backend
             npm install
@@ -159,7 +159,7 @@ jobs:
   #         name: Ensure back-end infrastructure exists
   #         command: |
   #           aws cloudformation deploy \
-  #             --template-file .circleci/files/backend.yml \
+  #             --template-file .circleci/files/back-end.yml \
   #             #--tags project=your-tag \
   #             # --stack-name "your back-end stack name with workflow id" \
   #             # --parameter-overrides ID="your workflow id"  
@@ -168,7 +168,7 @@ jobs:
   #         name: Ensure front-end infrastructure exist
   #         command: |
   #           aws cloudformation deploy \
-  #             --template-file .circleci/files/frontend.yml \
+  #             --template-file .circleci/files/front-end.yml \
   #             #--tags project=your-tag \
   #             # --stack-name "your front-end stack name with workflow id" \
   #             # --parameter-overrides ID="your workflow id"  
@@ -220,7 +220,7 @@ jobs:
 #             exit 1
 #     # Here's where you will add some code to rollback on failure      
 
-#   deploy-frontend:
+#   deploy-front-end:
 #     docker:
 #       # Docker image here that supports AWS CLI
 #     steps:
@@ -230,18 +230,18 @@ jobs:
 #           command: |
 #             # your code here
 #       - run:
-#           name: Get backend url
+#           name: Get back-end url
 #           command: |
 #             # your code here
-#             export API_URL="http://${BACKEND_IP}:3030"
+#             export API_URL="http://${back-end_IP}:3030"
 #             echo "${API_URL}"
 #       - run:
-#           name: Deploy frontend objects
+#           name: Deploy front-end objects
 #           command: |
 #             # your code here
 #       # Here's where you will add some code to rollback on failure      
                     
-#   deploy-backend:
+#   deploy-back-end:
 #     docker:
 #       # Docker image here that supports Ansible
 #     steps:
@@ -253,7 +253,7 @@ jobs:
 #           command: |
 #             # your code here
 #       - run:
-#           name: Deploy backend
+#           name: Deploy back-end
 #           command: |
 #             # your code here
 #       # Here's where you will add some code to rollback on failure  
@@ -268,15 +268,15 @@ jobs:
 #           command: |
 #             # your code here
 #       - run:
-#           name: Get backend url
+#           name: Get back-end url
 #           command: |
 #             # your code here
 #       - run:
-#           name: Backend smoke test.
+#           name: back-end smoke test.
 #           command: |
 #             # your code here
 #       - run:
-#           name: Frontend smoke test.
+#           name: front-end smoke test.
 #           command: |
 #             # your code here
 #       # Here's where you will add some code to rollback on failure  
@@ -319,18 +319,18 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
+      - build-front-end
+      - build-back-end
+      - test-front-end:
+          requires: [build-front-end]
+      - test-back-end:
+          requires: [build-back-end]
+      - scan-back-end:
+          requires: [build-back-end]
+      - scan-front-end:
+          requires: [build-front-end]
       # - deploy-infrastructure:
-      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #     requires: [test-front-end, test-back-end, scan-front-end, scan-back-end]
       #     filters:
       #       branches:
       #         only: [test-feature-branch]
@@ -338,12 +338,12 @@ workflows:
       #     requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
-      # - deploy-frontend:
+      # - deploy-front-end:
       #     requires: [run-migrations]
-      # - deploy-backend:
+      # - deploy-back-end:
       #     requires: [run-migrations]
       # - smoke-test:
-      #     requires: [deploy-backend, deploy-frontend]
+      #     requires: [deploy-back-end, deploy-front-end]
       # - cloudfront-update:
       #     requires: [smoke-test]
       # - cleanup:
