@@ -83,7 +83,7 @@ jobs:
           command: | 
             cd frontend
             npm install
-            install watchman
+            sudo apt-get update && sudo apt-get install watchman
             npm audit fix
             npm run test
             npm audit fix
@@ -106,8 +106,7 @@ jobs:
           name: Run backend test
           command: | 
             cd backend
-            npm install
-            install watchman
+            sudo apt-get update && sudo apt-get install       install watchman
             npm audit fix
             npm run test
             npm audit fix
