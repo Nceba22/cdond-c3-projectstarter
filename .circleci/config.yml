@@ -84,6 +84,7 @@ jobs:
             cd frontend
             npm install
             brew install watchman
+            npm audit fix
             npm run test
             npm audit fix
       - save_cache:
@@ -107,6 +108,7 @@ jobs:
             cd backend
             npm install
             brew install watchman
+            npm audit fix
             npm run test
             npm audit fix
       - save_cache:
