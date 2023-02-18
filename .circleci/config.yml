@@ -83,7 +83,7 @@ jobs:
           command: | 
             cd frontend
             npm install
-            brew install watchman
+            install watchman
             npm audit fix
             npm run test
             npm audit fix
@@ -107,7 +107,7 @@ jobs:
           command: | 
             cd backend
             npm install
-            brew install watchman
+            install watchman
             npm audit fix
             npm run test
             npm audit fix
