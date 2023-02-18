@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.2
 
 # commands:
 #   destroy-environment:
@@ -35,7 +35,7 @@ version: 2.1
 jobs:
   build-frontend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node:19.6.1
     steps:
       - checkout
       - restore_cache:
@@ -52,7 +52,7 @@ jobs:
 
   build-backend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node:19.6.1
     steps:
       - checkout
       - restore_cache:
@@ -70,7 +70,7 @@ jobs:
   test-frontend:
     docker:
       # Docker image here
-      - image: circleci/node:13.8.0
+      - image: circleci/node:19.6.1
     steps:
       # Checkout code from git
       - checkout
