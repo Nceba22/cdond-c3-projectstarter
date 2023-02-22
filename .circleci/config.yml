@@ -84,7 +84,7 @@ jobs:
             cd frontend
             npm install
             npm run test
-            npm cache clean –force
+            npm cache 
             npm audit fix
       - save_cache:
           paths: [frontend/node_modules]
