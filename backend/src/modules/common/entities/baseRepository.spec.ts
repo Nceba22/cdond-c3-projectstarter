@@ -8,6 +8,7 @@ import { IEventDispatcher } from '../events/eventDispatcher';
 import { Repository } from 'typeorm';
 import { SyncEventDispatcher } from '../events';
 
+
 describe('BaseRepository', () => {
   class TestEntity extends AggregateRoot<string> {
     id: string;
