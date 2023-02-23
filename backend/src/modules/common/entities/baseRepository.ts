@@ -56,7 +56,7 @@ export abstract class BaseRepository<TId, TEntity extends IAggregateRoot<TId>> {
     return this.repository.findOneOrFail(id);
   }
 
-  where(where: DeepPartial<TEntity>): BaseRepository<TId, TEntity> {
+  where(where: DeepPartial<TEntity>): BaseRepository<TId, TEntity>  {
     Object.keys(where).forEach(
       key => where[key] === undefined && delete where[key],
     );
