@@ -80,7 +80,7 @@ export abstract class BaseRepository<TId, TEntity extends IAggregateRoot<TId>> {
     const where = this.createWhere();
     const relations = this.createRelations();
     return {
-      where,
+      where:
       relations,
     };
   }
