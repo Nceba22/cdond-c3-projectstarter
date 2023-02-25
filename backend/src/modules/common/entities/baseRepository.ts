@@ -77,12 +77,21 @@ export abstract class BaseRepository<TId, TEntity extends IAggregateRoot<TId>> {
   }
 
   private createQueryOptions(): FindManyOptions<TEntity> {
-    const where = this.createWhere();
+   //  const where = this.createWhere();
     const relations = this.createRelations();
-    return {
-      where:
-      relations,
-    };
+    // return {
+    //   where,
+    //   relations,
+    // };
+     const entity: DeepPartial<TEntity>={
+     };
+     const where: FindManyOptions<TEntity> | FindManyOptions<TEntity>[] = <FindManyOptions<TEntity>>{ entity };
+    
+       
+      // await this.repository.update(relations, where)
+       return {
+         where , relations,
+       }
   }
 
   async first(): Promise<TEntity> {
